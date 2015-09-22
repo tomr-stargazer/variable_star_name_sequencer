@@ -40,11 +40,21 @@ def variable_name_sequencer(name):
 
     # these are the stars R thru Z; relatively simple
     if len(sequence_name) == 1:
-        return ord(sequence_name.upper()) - ord('Q')
 
+        if sequence_name.upper() < 'R':
+            raise ValueError("Invalid Variable Star Designation")
+        else:
+            return ord(sequence_name.upper()) - ord('Q')
+
+    # the remaining stars: RR thru QZ
     elif len(sequence_name) == 2:
-        initial_R = 9 # temporary hack! we'll have to figure out a better way for this to work...
-        return ord(sequence_name[1]) - ord('Q') + initial_R
+
+        first_letter, second_letter = sequence_name
+        initial_value = _first_letter_sequence_value(first_letter)
+        final_value = _second_letter_sequence_value(first_letter, second_letter)
+
+        return initial_value + final_value
+
     else:
         raise ValueError("Couldn't parse name")
 
@@ -53,6 +63,26 @@ def _first_letter_sequence_value(letter):
     """ Determines the sequence value of the first letter. """
 
     # R= 9 - it's the number of letters between R and Z, inclusive aka (Q, Z]
+    # S= it's R, plus all R's children... looks like a recursive thing?
+    # T = S plus all S's children
+
+    # ok so: first base case? R: take the ord between R and Z
+
+    # then the...
+
+    # prefix R is a special case
+    if ord(letter.upper()) == ord("R"):
+        return ord("Z") - ord(letter.upper()) + 1
+    elif letter.upper() != 'A':
+        previous_letter_sequence_value = _first_letter_sequence_value(chr(ord(letter.upper())-1))
+        return ord("Z") - ord(letter.upper()) + 2 + previous_letter_sequence_value
+    elif letter.upper() == 'A':
+        previous_letter_sequence_value = _first_letter_sequence_value("Z")
+        return previous_letter_sequence_value + 1
+
+        # return ord("Z") - ord(letter.upper()) + 1 + previous_letter_sequence_value
+
+
 
 def _second_letter_sequence_value(first_letter, second_letter):
 
