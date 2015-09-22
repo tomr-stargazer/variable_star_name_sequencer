@@ -33,10 +33,18 @@ from __future__ import division
 def variable_name_sequencer(name):
     """ Sequence number for a given variable designation. """
 
-    if (name.upper())[0] == 'R':
-        return 1
+    try:
+        sequence_name, constellation_name = name.split(' ')
+    except:
+        raise ValueError("Couldn't parse name")
 
-    first_letter = name.upper()[0]
-    return ord(first_letter) - ord('Q')
+    if len(sequence_name) == 1:
+        return ord(sequence_name) - ord('Q')
+    elif len(sequence_name) == 2:
+        initial_R = 9 # temporary hack! we'll have to figure out a better way for this to work...
+        return ord(sequence_name[1]) - ord('Q') + initial_R
+    else:
+        raise ValueError("Couldn't parse name")
+
     
 
