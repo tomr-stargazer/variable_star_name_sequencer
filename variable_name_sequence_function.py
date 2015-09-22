@@ -42,7 +42,7 @@ def variable_name_sequencer(name):
     if len(sequence_name) == 1:
 
         if sequence_name.upper() < 'R':
-            raise ValueError("Invalid Variable Star Designation")
+            raise ValueError("Invalid Variable Star Designation: single-letter names must be after Q")
         else:
             return ord(sequence_name.upper()) - ord('Q')
 
@@ -50,6 +50,12 @@ def variable_name_sequencer(name):
     elif len(sequence_name) == 2:
 
         first_letter, second_letter = sequence_name
+
+        if 'J' in (first_letter.upper(), second_letter.upper()):
+            raise ValueError("Invalid Variable Star Designation: names cannot contain `J`")
+        if first_letter.upper() > second_letter.upper():
+            raise ValueError("Invalid Variable Star Designation: first letter cannot be earlier than second letter")
+
         initial_value = _first_letter_sequence_value(first_letter)
         final_value = _second_letter_sequence_value(first_letter, second_letter)
 
