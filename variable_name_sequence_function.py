@@ -38,13 +38,25 @@ def variable_name_sequencer(name):
     except:
         raise ValueError("Couldn't parse name")
 
+    # these are the stars R thru Z; relatively simple
     if len(sequence_name) == 1:
-        return ord(sequence_name) - ord('Q')
+        return ord(sequence_name.upper()) - ord('Q')
+
     elif len(sequence_name) == 2:
         initial_R = 9 # temporary hack! we'll have to figure out a better way for this to work...
         return ord(sequence_name[1]) - ord('Q') + initial_R
     else:
         raise ValueError("Couldn't parse name")
 
-    
+
+def _first_letter_sequence_value(letter):
+    """ Determines the sequence value of the first letter. """
+
+    # R= 9 - it's the number of letters between R and Z, inclusive aka (Q, Z]
+
+def _second_letter_sequence_value(first_letter, second_letter):
+
+    # generally, just the distance between the first & second letter plus one
+
+    return 1 + ord(second_letter.upper()) - ord(first_letter.upper())
 
