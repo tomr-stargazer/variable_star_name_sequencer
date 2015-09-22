@@ -35,5 +35,8 @@ def variable_name_sequencer(name):
 
     if (name.upper())[0] == 'R':
         return 1
+
+    first_letter = name.upper()[0]
+    return ord(first_letter) - ord('Q')
     
 
