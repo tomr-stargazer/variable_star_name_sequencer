@@ -68,25 +68,30 @@ def variable_name_sequencer(name):
 def _first_letter_sequence_value(letter):
     """ Determines the sequence value of the first letter. """
 
-    # R= 9 - it's the number of letters between R and Z, inclusive aka (Q, Z]
-    # S= it's R, plus all R's children... looks like a recursive thing?
-    # T = S plus all S's children
-
-    # ok so: first base case? R: take the ord between R and Z
-
-    # then the...
-
-    # prefix R is a special case
+    # prefix R is a special/base case
     if ord(letter.upper()) == ord("R"):
+
         return ord("Z") - ord(letter.upper()) + 1
+
     elif letter.upper() != 'A':
+
         previous_letter_sequence_value = _first_letter_sequence_value(chr(ord(letter.upper())-1))
-        return ord("Z") - ord(letter.upper()) + 2 + previous_letter_sequence_value
+        value = ord("Z") - ord(letter.upper()) + 2 + previous_letter_sequence_value
+
+        # letters from K to Q need to skip the whole JJ thru JZ sequence.
+        if letter.upper() == 'J':
+            return previous_letter_sequence_value
+
+        # (only) letters from B to I need to lose 1 for every J they skipped
+        elif letter.upper() > 'A' and letter.upper() < 'J':
+            return value - 1
+
+        else:
+            return value
+
     elif letter.upper() == 'A':
         previous_letter_sequence_value = _first_letter_sequence_value("Z")
         return previous_letter_sequence_value + 1
-
-        # return ord("Z") - ord(letter.upper()) + 1 + previous_letter_sequence_value
 
 
 
