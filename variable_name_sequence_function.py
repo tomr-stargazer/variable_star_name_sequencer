@@ -94,5 +94,10 @@ def _second_letter_sequence_value(first_letter, second_letter):
 
     # generally, just the distance between the first & second letter plus one
 
-    return 1 + ord(second_letter.upper()) - ord(first_letter.upper())
+    value = 1 + ord(second_letter.upper()) - ord(first_letter.upper())
 
+    # we skip J in the alphabet
+    if first_letter.upper() < 'J' and second_letter.upper() > 'J':
+        return value - 1
+    else:
+        return value

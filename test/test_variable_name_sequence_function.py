@@ -27,7 +27,7 @@ assert _second_letter_sequence_value('R', 'S') == 2
 assert _second_letter_sequence_value('S', 'S') == 1
 assert _second_letter_sequence_value('A', 'A') == 1
 assert _second_letter_sequence_value('A', 'I') == 9
-# assert _second_letter_sequence_value('A', 'K') == 10
+assert _second_letter_sequence_value('A', 'K') == 10
 
 
 assert _first_letter_sequence_value("R") == 9
@@ -35,3 +35,4 @@ assert _first_letter_sequence_value("S") == 18
 assert _first_letter_sequence_value("T") == 26
 
 assert _first_letter_sequence_value("A") == 54
+# assert _first_letter_sequence_value("B") == 79
