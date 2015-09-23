@@ -21,9 +21,10 @@ The current naming system is:
 * Abandon the Latin script after 334 combinations of letters and 
   start naming stars with V335, V336, and so on.
 
-The second letter is never nearer the beginning of the alphabet than the first, e.g., no star can be BA, CA, CB, DA and so on.
+The second letter is never nearer the beginning of the alphabet 
+than the first, e.g., no star can be BA, CA, CB, DA and so on.
 
-Examples are R Coronae Borealis, YZ Ceti, V603 Aquilae.
+Examples are R Coronae Borealis, YZ Ceti, V603 Aquilae".
 
 """
 
@@ -54,7 +55,7 @@ def variable_name_sequencer(name):
         if 'J' in (first_letter.upper(), second_letter.upper()):
             raise ValueError("Invalid Variable Star Designation: names cannot contain `J`")
         if first_letter.upper() > second_letter.upper():
-            raise ValueError("Invalid Variable Star Designation: first letter cannot be earlier than second letter")
+            raise ValueError("Invalid Variable Star Designation: second letter cannot be earlier than first letter")
 
         initial_value = _first_letter_sequence_value(first_letter)
         final_value = _second_letter_sequence_value(first_letter, second_letter)
